@@ -53,7 +53,7 @@
 				</section>
 					
 				<section class = "registration-container" style = "color: #02023b; font-weight: 600;">
-					<form class = "form" id = "registrationForm" method = "POST" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
+					<form class = "form" id = "registrationForm">
 		
 						<!-- Full Policy Text -->
 							<h2 style = "color: #02023b;">Terms</h2>
@@ -211,12 +211,12 @@
 									<label for = "todayDate">Date</label>
 									<input type = "text" id = "todayDate" name = "todayDate" readonly>
 								</div>
-					
-							
-							<!-- Submit Button -->
-							<div class = "field submit-wrapper">
-								<button type = "submit" class = "submit-button" onclick = "return validateRegistrationForm()">Register</button>
-							</div>
+								
+						
+							<!-- Payment Button -->
+								<button type = "button" id = "payButton" class = "submit-button">
+									Pay & Complete Registration
+								</button>
 							
 					</form>
 				</section>
