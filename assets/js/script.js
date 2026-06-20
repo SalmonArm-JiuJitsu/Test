@@ -545,13 +545,23 @@ async function handleRegistrationPayment() {
     };
 
     // send to Google Sheets (non-blocking)
-    fetch(SHEETS_URL, {
-        method: "POST",
-        body: JSON.stringify(payload)
-    }).catch(err => console.log("Sheet error:", err));
+    try {
 
-    // redirect to Square
-    window.location.href = SQUARE_URL;
+		await fetch(SHEETS_URL, {
+			method: "POST",
+			body: JSON.stringify(payload)
+		});
+	
+		window.location.href = SQUARE_URL;
+	
+	}
+	catch (err) {
+	
+		alert("There was a problem saving your registration. Please try again.");
+	
+		console.error(err);
+	
+	}
 }
 
 // bind button (registration page only)
