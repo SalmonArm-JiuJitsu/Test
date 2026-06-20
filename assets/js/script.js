@@ -541,7 +541,10 @@ async function handleRegistrationPayment() {
         parentEmail: document.getElementById("parentEmail").value,
         parentPhone: document.getElementById("parentPhone").value,
         todayDate: document.getElementById("todayDate").value,
-        children: JSON.stringify(children)
+		childFirstName: document.getElementById("childFirstName").value,
+        childLastName: document.getElementById("childLastName").value,
+        childDOB: document.getElementById("childDOB").value,
+       // children: JSON.stringify(children)
     };
 
     // send to Google Sheets (non-blocking)
@@ -556,9 +559,7 @@ async function handleRegistrationPayment() {
 	
 	}
 	catch (err) {
-	
 		alert("There was a problem saving your registration. Please try again.");
-	
 		console.error(err);
 	
 	}
