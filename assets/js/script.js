@@ -517,24 +517,12 @@ async function handleRegistrationPayment() {
 
     const form = document.getElementById("registrationForm");
 
-    // HTML validation only (safe, no side effects)
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
 
-    // collect children
-    const children = [];
-
-    document.querySelectorAll("#childrenContainer .child-section").forEach(section => {
-        children.push({
-            firstName: section.querySelector("input[name*='FirstName']").value,
-            lastName: section.querySelector("input[name*='LastName']").value,
-            dob: section.querySelector("input[name*='DOB']").value
-        });
-    });
-
-    // payload
+    // Info Capture
     const payload = {
         parentFirstName: document.getElementById("parentFirstName").value,
         parentLastName: document.getElementById("parentLastName").value,
@@ -547,7 +535,7 @@ async function handleRegistrationPayment() {
        // children: JSON.stringify(children)
     };
 
-    // send to Google Sheets (non-blocking)
+    // Send to Google Sheets
     try {
 
 		await fetch(SHEETS_URL, {
