@@ -18,7 +18,7 @@
 		<link rel = "stylesheet" href = "assets/css/style.css" />
 	</head>
 
-	<body>
+	<body style = "visibility: hidden;">
         <!-- Navbar & Menu -->
 			<header>
 				<nav class = "navbar">
@@ -28,9 +28,8 @@
 						<li class = "close"><a><i class = "fa-solid fa-times style4"></i></a></li>
 						<li><a href = "schedule.html" class = "menu-link">Schedule</a></li>
 						<li><a href = "programs.html" class = "menu-link">Programs</a></li>
-						<li><a href = "trial.html" class = "menu-link">New Students</a></li>
+						<li><a href = "trial.html" class = "menu-link">Free Trial</a></li>
 						<li><a href = "about.html" class = "menu-link">About</a></li>
-						<li><a href = "gallery.html" class = "menu-link">Gallery</a></li> 
 						<a class = "contact-button" href = "#footer">Contact</a>
 					</ul>
 
@@ -263,20 +262,21 @@
 					<!-- Form -->
 						<form class = "form" method = "post" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
 
-							<div class = "field-left">
-								<label for = "">name</label>
-								<input type = "text" id = "name">
-							</div>
-							
-							<div class = "field-right">
-								<label for = "">email</label>
-								<input type = "email" id = "email">
-							</div>
-							
-							<div class = "field">
-								<label for = "message">Message</label>
-								<textarea id = "message" rows = "6"></textarea>
-							</div>
+							<!-- Fields -->
+                                <div class = "field-left">
+                                    <label for = "nameInput">name</label>
+                                    <input type = "text" id = "nameInput" name = "name">
+                                </div>
+                                
+                                <div class = "field-right">
+                                    <label for = "emailInput">email</label>
+                                    <input type = "email" id = "emailInput" name = "email">
+                                </div>
+                                
+                                <div class = "field">
+                                    <label for = "messageTextArea">Message</label>
+                                    <textarea id = "messageTextArea" name = "message" rows = "6"></textarea>
+                                </div>
 				
 							
 							<button onclick = "return contactForm()">Send</button>

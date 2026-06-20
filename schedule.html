@@ -18,7 +18,7 @@
 		<link rel = "stylesheet" href = "assets/css/style.css" />
 	</head>
 
-	<body>
+	<body style = "visibility: hidden;">
         <!-- Navbar & Menu -->
 			<header>
 				<nav class = "navbar">
@@ -28,9 +28,8 @@
 						<li class = "close"><a><i class = "fa-solid fa-times style4"></i></a></li>
 						<li><a href = "schedule.html" class = "menu-link">Schedule</a></li>
 						<li><a href = "programs.html" class = "menu-link">Programs</a></li>
-						<li><a href = "trial.html" class = "menu-link">New Students</a></li>
+						<li><a href = "trial.html" class = "menu-link">Free Trial</a></li>
 						<li><a href = "about.html" class = "menu-link">About</a></li>
-						<li><a href = "gallery.html" class = "menu-link">Gallery</a></li> 
 						<a class = "contact-button" href = "#footer">Contact</a>
 					</ul>
 
@@ -45,43 +44,49 @@
                 <h1>Schedule</h1>
 				
 				<div class = "schedule">
-					<img src = "images/schedule/schedule.jpg">
+
+					<p class = "style5">All new visitors must book an appointment for a safety & hygiene orientation (with a parent/guardian if under 19).</p>
+
+					<div class = "schedule-filter-dropdown">
+						<button id = "filterToggle">
+							<i class = "style6 fas fa-filter"></i>
+						</button>
+					
+						<div id = "filterMenu" class = "hidden">
+							<div data-filter = "all">All Programs</div>
+							<div data-filter = "kids-7-9">Kids 7-9</div>
+							<div data-filter = "kids-9-13">Kids 9-13</div>
+							<div data-filter = "no-gi-13+">No-Gi 13+</div>
+						</div>
+					</div>
+					
+					<div id = "scheduleApp"></div>
+
 
 				
 					<!-- Holidays -->
 						<h2>Holiday Closures</h2>
 
-						<div class = "info-boxes">
+						<div class = "holiday-list">
 
-							<div>
-								<img src = "images/schedule/easter.jpg" />
-								<div class = "details">
-									<li>Easter Sunday</li>
-									<li>Easter Monday</li>
-								</div>
+							<div class = "holiday-row">
+								<i class = "fa-solid fa-egg"></i>
+								<span>Easter Sunday & Easter Monday</span>
 							</div>
 
-							<div>
-								<img src = "images/schedule/thanksgiving.jpg" />
-								<div class = "details">
-									<li>Thanksgiving Sunday</li>
-									<li>Thanksgiving Monday</li>
-								</div>
+							<div class = "holiday-row">
+								<i class = "fa-solid fa-turkey"></i>
+								<span>Thanksgiving Sunday & Thanksgiving Monday</span>
 							</div>
 
-							<div>
-								<img src = "images/schedule/halloween.jpg" />
-								<div class = "details">
-									<li>Halloween</li>
-								</div>
+							<div class = "holiday-row">
+								<i class = "fa-solid fa-pumpkin"></i>
+								<span>Halloween</span>
 							</div>
 
-							<div>
-								<img src = "images/schedule/christmas.jpg" />
-								<div class = "details">
-									<li>Christmas Eve</li>
-									<li>Christmas Day</li>
-								</div>
+							<div class = "holiday-row">
+								<i class = "fa-solid fa-tree"></i>
+								<span>Christmas Eve & Christmas Day</span>
 							</div>
 
 						</div>
@@ -99,20 +104,21 @@
 					<!-- Form -->
 						<form class = "form" method = "post" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
 
-							<div class = "field-left">
-								<label for = "">name</label>
-								<input type = "text" id = "name">
-							</div>
-							
-							<div class = "field-right">
-								<label for = "">email</label>
-								<input type = "email" id = "email">
-							</div>
-							
-							<div class = "field">
-								<label for = "message">Message</label>
-								<textarea id = "message" rows = "6"></textarea>
-							</div>
+							<!-- Fields -->
+								<div class = "field-left">
+									<label for = "nameInput">name</label>
+									<input type = "text" id = "nameInput" name = "name">
+								</div>
+								
+								<div class = "field-right">
+									<label for = "emailInput">email</label>
+									<input type = "email" id = "emailInput" name = "email">
+								</div>
+								
+								<div class = "field">
+									<label for = "messageTextArea">Message</label>
+									<textarea id = "messageTextArea" name = "message" rows = "6"></textarea>
+								</div>
 				
 							
 							<button onclick = "return contactForm()">Send</button>
