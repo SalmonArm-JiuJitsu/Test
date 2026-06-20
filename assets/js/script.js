@@ -511,7 +511,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Registration Upload & Payment 
 
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwYn_UhVUvum5T-VVJrfRCY11BW8F8WH2eFbt3W9zKXPoxIkyrhgRUnKHMl8IsUIpRm/exec";
-const SQUARE_URL = "https://square.link/u/VqLP6kL6";
+const SQUARE_URL = "https://square.link/u/6dYq5Ews";
 
 async function handleRegistrationPayment() {
 
