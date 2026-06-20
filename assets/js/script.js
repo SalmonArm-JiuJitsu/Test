@@ -300,7 +300,7 @@ function renderWeek() {
 	container.appendChild(row);
 }
 
-// filter dropdown
+// Filter Dropdown
 function initFilters() {
 	const toggle = document.getElementById("filterToggle");
 	const menu = document.getElementById("filterMenu");
@@ -506,3 +506,59 @@ document.addEventListener("DOMContentLoaded", function () {
 			// scroll to top cleanly
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		}
+
+
+// Registration Upload & Payment 
+
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwYn_UhVUvum5T-VVJrfRCY11BW8F8WH2eFbt3W9zKXPoxIkyrhgRUnKHMl8IsUIpRm/exec";
+const SQUARE_URL = "https://square.link/u/VqLP6kL6";
+
+async function handleRegistrationPayment() {
+
+    const form = document.getElementById("registrationForm");
+
+    // HTML validation only (safe, no side effects)
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // collect children
+    const children = [];
+
+    document.querySelectorAll("#childrenContainer .child-section").forEach(section => {
+        children.push({
+            firstName: section.querySelector("input[name*='FirstName']").value,
+            lastName: section.querySelector("input[name*='LastName']").value,
+            dob: section.querySelector("input[name*='DOB']").value
+        });
+    });
+
+    // payload
+    const payload = {
+        parentFirstName: document.getElementById("parentFirstName").value,
+        parentLastName: document.getElementById("parentLastName").value,
+        parentEmail: document.getElementById("parentEmail").value,
+        parentPhone: document.getElementById("parentPhone").value,
+        todayDate: document.getElementById("todayDate").value,
+        children: JSON.stringify(children)
+    };
+
+    // send to Google Sheets (non-blocking)
+    fetch(SHEETS_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+    }).catch(err => console.log("Sheet error:", err));
+
+    // redirect to Square
+    window.location.href = SQUARE_URL;
+}
+
+// bind button (registration page only)
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("payButton");
+
+    if (btn) {
+        btn.addEventListener("click", handleRegistrationPayment);
+    }
+});
