@@ -69,20 +69,17 @@ function contactForm() {
 
 // Home Icon Disappear On Scoll
 
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function() {	
 
-    const icon = document.querySelector(".icon");
+	const icon = document.querySelector(".icon");
 
-    if (icon) {
-        if (window.scrollY > 60) {
-            icon.classList.add("disappear");
-        }
-        else {
-            icon.classList.remove("disappear");
-        }
-    }
-
-});
+	if (window.scrollY > 60) {
+		icon.classList.add("disappear");
+	}
+	else {
+		icon.classList.remove("disappear");
+	}
+   });
 
 
 
@@ -322,7 +319,7 @@ function initFilters() {
 		};
 	});
 
-	// Closes on Outside Click
+	// THIS PART closes on outside click
 	document.addEventListener("click", (e) => {
 		if (!menu.contains(e.target) && !toggle.contains(e.target)) {
 			menu.classList.add("hidden");
@@ -335,7 +332,7 @@ function changeWeek(offsetChange) {
 	renderWeek();
 }
 
-// Init
+// init
 document.addEventListener('DOMContentLoaded', () => {
 	initFilters();
 	renderWeek();
@@ -511,8 +508,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 
-		
-// Square Payment & Registration Capture
+// Registration Upload & Payment 
 
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwYn_UhVUvum5T-VVJrfRCY11BW8F8WH2eFbt3W9zKXPoxIkyrhgRUnKHMl8IsUIpRm/exec";
 const SQUARE_URL = "https://square.link/u/6dYq5Ews";
@@ -520,46 +516,57 @@ const SQUARE_URL = "https://square.link/u/6dYq5Ews";
 async function handleRegistrationPayment() {
 
     const form = document.getElementById("registrationForm");
-    if (!form) return;
 
+    // HTML validation only (safe, no side effects)
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
 
-    if (!validateRegistrationForm()) return;
+    // collect children
+    const children = [];
 
+    document.querySelectorAll("#childrenContainer .child-section").forEach(section => {
+        children.push({
+            firstName: section.querySelector("input[name*='FirstName']").value,
+            lastName: section.querySelector("input[name*='LastName']").value,
+            dob: section.querySelector("input[name*='DOB']").value
+        });
+    });
+
+    // payload
     const payload = {
         parentFirstName: document.getElementById("parentFirstName").value,
         parentLastName: document.getElementById("parentLastName").value,
         parentEmail: document.getElementById("parentEmail").value,
         parentPhone: document.getElementById("parentPhone").value,
         todayDate: document.getElementById("todayDate").value,
-        childFirstName: document.getElementById("childFirstName").value,
-        childLastName: document.getElementById("childLastName").value,
-        childDOB: document.getElementById("childDOB").value
+        children: JSON.stringify(children)
     };
 
+    // send to Google Sheets (non-blocking)
     try {
-        await fetch(SHEETS_URL, {
-            method: "POST",
-            body: new URLSearchParams(payload)
-        });
-        
-        window.location.href = SQUARE_URL;
 
-    } catch (err) {
-        console.error(err);
-        alert("There was a problem saving your registration. Please try again.");
-    }
+		await fetch(SHEETS_URL, {
+			method: "POST",
+			body: JSON.stringify(payload)
+		});
+	
+		window.location.href = SQUARE_URL;
+	
+	}
+	catch (err) {
+		alert("There was a problem saving your registration. Please try again.");
+		console.error(err);
+	
+	}
 }
 
-
-// Button Bind
-
-function bindRegistrationButton() {
+// bind button (registration page only)
+document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("payButton");
-    if (!btn) return;
 
-    btn.addEventListener("click", handleRegistrationPayment);
-}
+    if (btn) {
+        btn.addEventListener("click", handleRegistrationPayment);
+    }
+});
