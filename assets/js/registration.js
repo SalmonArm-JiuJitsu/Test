@@ -82,12 +82,9 @@ async function handleRegistrationPayment() {
     try {
         await fetch(SHEETS_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
+            body: new URLSearchParams(payload)
         });
-
+        
         window.location.href = SQUARE_URL;
 
     } catch (err) {
