@@ -319,7 +319,7 @@ function initFilters() {
 		};
 	});
 
-	// THIS PART closes on outside click
+	// Closes on Outside Click
 	document.addEventListener("click", (e) => {
 		if (!menu.contains(e.target) && !toggle.contains(e.target)) {
 			menu.classList.add("hidden");
@@ -332,7 +332,7 @@ function changeWeek(offsetChange) {
 	renderWeek();
 }
 
-// init
+// Init
 document.addEventListener('DOMContentLoaded', () => {
 	initFilters();
 	renderWeek();
@@ -506,58 +506,3 @@ document.addEventListener("DOMContentLoaded", function () {
 			// scroll to top cleanly
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		}
-
-
-// Registration Upload & Payment 
-
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwYn_UhVUvum5T-VVJrfRCY11BW8F8WH2eFbt3W9zKXPoxIkyrhgRUnKHMl8IsUIpRm/exec";
-const SQUARE_URL = "https://square.link/u/6dYq5Ews";
-
-async function handleRegistrationPayment() {
-
-    const form = document.getElementById("registrationForm");
-
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-
-    // Info Capture
-    const payload = {
-        parentFirstName: document.getElementById("parentFirstName").value,
-        parentLastName: document.getElementById("parentLastName").value,
-        parentEmail: document.getElementById("parentEmail").value,
-        parentPhone: document.getElementById("parentPhone").value,
-        todayDate: document.getElementById("todayDate").value,
-		childFirstName: document.getElementById("childFirstName").value,
-        childLastName: document.getElementById("childLastName").value,
-        childDOB: document.getElementById("childDOB").value,
-       // children: JSON.stringify(children)
-    };
-
-    // Send to Google Sheets
-    try {
-
-		await fetch(SHEETS_URL, {
-			method: "POST",
-			body: JSON.stringify(payload)
-		});
-	
-		window.location.href = SQUARE_URL;
-	
-	}
-	catch (err) {
-		alert("There was a problem saving your registration. Please try again.");
-		console.error(err);
-	
-	}
-}
-
-// bind button (registration page only)
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("payButton");
-
-    if (btn) {
-        btn.addEventListener("click", handleRegistrationPayment);
-    }
-});
