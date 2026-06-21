@@ -15,20 +15,39 @@ document.addEventListener("DOMContentLoaded", () => {
 // Validate Form
 
 function validateRegistrationForm() {
-    const parentPhone = document.getElementById("parentPhone");
-    if (!parentPhone) return true;
+    const parentPhone = document.getElementById('parentPhone');
 
     if (parentPhone.value.length !== 10) {
-        alert("Please enter a 10-digit phone number.");
+        alert("Please enter a 10-digit phone number.")
         return false;
     }
 
     if (!/^\d+$/.test(parentPhone.value)) {
-        alert("Please include only numbers.");
+        alert("Please include only numbers.")
         return false;
     }
 
-    return true;
+    const fakeNumbers = ['1234567890, 0123456789, 1231231231', '1231231232', '1231231233, 1231231234, 1231231235, 1231231236, 1231231237, 1231231238, 1231231239, 1231231230'];
+
+    if (fakeNumbers.includes(parentPhone.value)) {
+        alert("Please enter a real phone number.");
+        return false;
+    }
+
+    const interests = document.querySelectorAll('input[name="classInterest[]"]');
+
+    if (interests.length > 0) {
+        const checked = document.querySelectorAll('input[name="classInterest[]"]:checked');
+
+        if (checked.length === 0) {
+            alert("Please select at least one class option.");
+            return false;
+        }
+    }
+
+    else {
+        return true;
+    }
 }
 
 
