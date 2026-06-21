@@ -69,17 +69,20 @@ function contactForm() {
 
 // Home Icon Disappear On Scoll
 
-window.addEventListener('scroll', function() {	
+window.addEventListener('scroll', function() {
 
-	const icon = document.querySelector(".icon");
+    const icon = document.querySelector(".icon");
 
-	if (window.scrollY > 60) {
-		icon.classList.add("disappear");
-	}
-	else {
-		icon.classList.remove("disappear");
-	}
-   });
+    if (icon) {
+        if (window.scrollY > 60) {
+            icon.classList.add("disappear");
+        }
+        else {
+            icon.classList.remove("disappear");
+        }
+    }
+
+});
 
 
 
@@ -506,3 +509,57 @@ document.addEventListener("DOMContentLoaded", function () {
 			// scroll to top cleanly
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		}
+
+
+		
+// Square Payment & Registration Capture
+
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwYn_UhVUvum5T-VVJrfRCY11BW8F8WH2eFbt3W9zKXPoxIkyrhgRUnKHMl8IsUIpRm/exec";
+const SQUARE_URL = "https://square.link/u/6dYq5Ews";
+
+async function handleRegistrationPayment() {
+
+    const form = document.getElementById("registrationForm");
+    if (!form) return;
+
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    if (!validateRegistrationForm()) return;
+
+    const payload = {
+        parentFirstName: document.getElementById("parentFirstName").value,
+        parentLastName: document.getElementById("parentLastName").value,
+        parentEmail: document.getElementById("parentEmail").value,
+        parentPhone: document.getElementById("parentPhone").value,
+        todayDate: document.getElementById("todayDate").value,
+        childFirstName: document.getElementById("childFirstName").value,
+        childLastName: document.getElementById("childLastName").value,
+        childDOB: document.getElementById("childDOB").value
+    };
+
+    try {
+        await fetch(SHEETS_URL, {
+            method: "POST",
+            body: new URLSearchParams(payload)
+        });
+        
+        window.location.href = SQUARE_URL;
+
+    } catch (err) {
+        console.error(err);
+        alert("There was a problem saving your registration. Please try again.");
+    }
+}
+
+
+// Button Bind
+
+function bindRegistrationButton() {
+    const btn = document.getElementById("payButton");
+    if (!btn) return;
+
+    btn.addEventListener("click", handleRegistrationPayment);
+}
