@@ -253,6 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // TODO: swap for PowerForm later. Using the same endpoint as the contact form for now.
 const BOOKING_ENDPOINT = 'https://formsubmit.co/5706783fd4c76300c52561682502228e';
 
+// Where people land after the FormSubmit captcha (needs a full https:// URL)
+const THANK_YOU_URL = 'https://salmonarmjiujitsu.ca/thank-you.html';
+
 // Google Sheet (Apps Script web app)
 const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzGxX4lWJe1r8sgzVuwML_K7wnbdtApFHobdWF8wcYGe6FNS3jwsKgOhdqJuGLk8VVGLQ/exec';
 
@@ -265,12 +268,14 @@ const GENDER_OPTIONS = `
 	<option>Male</option>
 	<option>Female</option>`;
 
-// Sends a copy of the booking to the Google Sheet
+// Sends a copy of the booking to the Google Sheet and waits (max 4 seconds)
+// so the page doesn't navigate away before the request goes through
 function sendToSheet(form) {
-	if (!SHEET_ENDPOINT.startsWith('https://')) return;
+	if (!SHEET_ENDPOINT.startsWith('https://')) return Promise.resolve();
 	const data = new URLSearchParams(new FormData(form));
-	fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data, keepalive: true })
-		.catch(() => {});
+	const request = fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
+	const timeout = new Promise(resolve => setTimeout(resolve, 4000));
+	return Promise.race([request, timeout]);
 }
 
 function field(id, name, label, type = 'text', extra = '') {
@@ -307,7 +312,8 @@ const CLASS_HIDDEN = `
 	<input type="hidden" name="class_program" class="js-program">
 	<input type="hidden" name="class_date" class="js-date">
 	<input type="hidden" name="class_time" class="js-time">
-	<input type="hidden" name="_subject" value="New free trial booking">`;
+	<input type="hidden" name="_subject" value="New free trial booking">
+	<input type="hidden" name="_next" value="${THANK_YOU_URL}">`;
 
 function buildBookingModal() {
 	const overlay = createEl('div', 'booking-overlay');
@@ -413,9 +419,17 @@ function buildBookingModal() {
 		input.addEventListener('input', () => validateDob(input));
 	});
 
-	// Also log each booking to the Google Sheet (only fires after validation passes)
+	// Log each booking to the Google Sheet first, then send to FormSubmit
+	// (this only runs after the browser's validation passes)
 	overlay.querySelectorAll('.booking-form').forEach(form => {
-		form.addEventListener('submit', () => sendToSheet(form));
+		form.addEventListener('submit', async e => {
+			e.preventDefault();
+			const btn = form.querySelector('.booking-submit');
+			btn.disabled = true;
+			btn.textContent = 'Booking...';
+			await sendToSheet(form);
+			form.submit();
+		});
 	});
 
 	return overlay;
@@ -489,6 +503,10 @@ function openBookingModal(entry, startTime) {
 	// Reset any previous entries
 	bookingModal.querySelectorAll('.booking-form').forEach(f => f.reset());
 	bookingModal.querySelectorAll('.js-dob').forEach(i => i.setCustomValidity(''));
+	bookingModal.querySelectorAll('.booking-submit').forEach(b => {
+		b.disabled = false;
+		b.textContent = 'Book Class';
+	});
 
 	// Youth-only classes skip the toggle
 	const allowSelf = program.allowSelf !== false;
