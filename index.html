@@ -26,7 +26,7 @@
 					<a href = "index.html"><img class = "logo" src = "images/logo/logo.svg"></a>
 					
 					<ul class = "menu">
-						<li class = "close"><a><i class = "fa-solid fa-times style4"></i></a></li>
+						<li class = "close"><a><i class = "fa-solid fa-times"></i></a></li>
 						<li><a href = "schedule.html" class = "menu-link">Schedule</a></li>
 						<li><a href = "programs.html" class = "menu-link">Programs</a></li>
 						<li><a href = "trial.html" class = "menu-link">Free Trial</a></li>
@@ -34,7 +34,7 @@
 						<a class = "contact-button" href = "#footer">Contact</a>
 					</ul>
 
-					<a href = "#footer"><button class = "style4">Contact</button></a>
+					<a href = "#footer"><button>Contact</button></a>
 					<a class = "burger">&#9776;</a>
 				</nav>
 			</header>
@@ -43,119 +43,55 @@
         <!-- Home -->
 			<div class = "home">
 
-				<div class = "heading">
 
-					<div class = "title">
-						<img class = "desktop" src = "images/index/bannerExo.svg" />
-						<img class = "mobile" src = "images/index/bannerMobileExo.svg" />
-					</div>
-
-					<div class = "subtitle">
-						<p class = "text">No-Gi Jiu-Jitsu & Wrestling</p>
-						<a href = "trial.html"><button class = "style2">Free Trial</button></a>
-					</div>
-
-					<div class = "icon"><a href = "#programs"><i class = "fa-thin fa-circle-arrow-down"></i></a></div>
-					
-				</div>
 
 			</div>
 		
-		<!-- Main -->
-			<main>
-				<div id = "programs">
-					<h1>Programs</h1>
-					<div class = "info-boxes">
 
-						<!--<div>
-							<img src = "images/programs/kids(5-6).jpg" />
-							<h2>Kids No-Gi (5-6 yrs)</h2>
-							<a>This 30 minute class introduces young children to jiu-jitsu through movement-based 
-								games and playful grappling activities. We create a fun and engaging environment 
-								that encourages exploration, coordination, and confidence, while laying the 
-								foundation for effective grappling skills through guided play.
-							</a>
-						</div>-->
-
-						<div>
-							<img src = "images/programs/kids(7-9).jpg" />
-							<h2>Kids No-Gi (7-9 yrs)</h2>
-							<a>This program is designed for children ages 7-9 and focuses on developing motor 
-								skills, and effective grappling skills through fun, task-based games. A key focus of 
-								this class is learning how to listen, focus, and follow instructions, providing the 
-								foundation for successful participation and skill development.
-							</a>
-						</div>
-
-						<div>
-							<img src = "images/programs/kids(9-13).jpg" />
-							<h2>Kids No-Gi (9-13 yrs)</h2>
-							<a>This program helps students develop coordination, fitness, and effective grappling skills. 
-								Using a constraints-led approach, we build problem-solving, resilience, and teamwork 
-								through live, task-based training. Students train with greater independence in a fun, 
-								structured, and energetic environment.</a>
-						</div>
-
-						<div>
-							<img src = "images/programs/teens&adults.jpg" />
-							<h2>No-Gi (Ages 13+)</h2>
-							<a>In this program, teens and adults of all experience levels train together to develop 
-								coordination, fitness, and effective grappling skills. Beginners get support from 
-								coaches and other experienced participants, while experienced practitioners find ample 
-								opportunities for continued growth and refinement. Extended class time allows for 
-								additional training and open mat time at the end of class. Youth placement is based 
-								on size and readiness.
-							</a>
-						</div>
-
-					</div>
-				</div>
-			</main>
-
-
-        <!-- Footer -->    
+		<!-- Footer -->    
 			<footer id = "footer">
 
 				<!-- Form & Location -->
 					<div class = "form-location">
 
-					<!-- Form -->
-						<form class = "form" method = "post" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
+						<!-- Form -->
+							<form class = "form" method = "post" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
 
-							<!-- Fields -->
-								<div class = "field-left">
-									<label for = "nameInput">name</label>
-									<input type = "text" id = "nameInput" name = "name">
-								</div>
+								<!-- Fields -->
+									<div class = "field-left">
+										<label for = "nameInput">name</label>
+										<input type = "text" id = "nameInput" name = "name">
+									</div>
+									
+									<div class = "field-right">
+										<label for = "emailInput">email</label>
+										<input type = "email" id = "emailInput" name = "email">
+									</div>
+									
+									<div class = "field">
+										<label for = "messageTextArea">Message</label>
+										<textarea id = "messageTextArea" name = "message" rows = "6"></textarea>
+									</div>
+					
 								
-								<div class = "field-right">
-									<label for = "emailInput">email</label>
-									<input type = "email" id = "emailInput" name = "email">
-								</div>
+								<button onclick = "return contactForm()">Send</button>
+								<button type = "reset" value = "clear">Clear</button>
 								
-								<div class = "field">
-									<label for = "messageTextArea">Message</label>
-									<textarea id = "messageTextArea" name = "message" rows = "6"></textarea>
-								</div>
-							
-							<button onclick = "return contactForm()">Send</button>
-							<button type = "reset" value = "clear" class = "style1">Clear</button>
-							
-						</form>
-			
-
-					<!-- Location -->
-						<div class = "location">
+							</form>
 				
-							<div class = "maps">
-								<iframe src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2526.67468015196!2d-119.23152652284392!3d50.707421271642275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537ef508ac5cdbe7%3A0x584c46cfd93e3c3e!2sSalmon%20Arm%20Jiu-Jitsu!5e0!3m2!1sen!2sca!4v1683385315972!5m2!1sen!2sca" 
-									allowfullscreen = "true" 
-									loading = "lazy"
-									referrerpolicy = "no-referrer-when-downgrade">
-								</iframe>
-							</div>
 
-						</div>
+						<!-- Location -->
+							<div class = "location">
+					
+								<div class = "maps">
+									<iframe src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2526.67468015196!2d-119.23152652284392!3d50.707421271642275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537ef508ac5cdbe7%3A0x584c46cfd93e3c3e!2sSalmon%20Arm%20Jiu-Jitsu!5e0!3m2!1sen!2sca!4v1683385315972!5m2!1sen!2sca" 
+										allowfullscreen = "true" 
+										loading = "lazy"
+										referrerpolicy = "no-referrer-when-downgrade">
+									</iframe>
+								</div>
+
+							</div>
 
 					</div>
 
@@ -163,38 +99,37 @@
 				<!-- Contact & Socials Background -->
 					<div class = "contact-socials-wrapper">
 
-					<!-- Contact -->
-						<div class = "contact-socials">
+						<!-- Contact -->
+							<div class = "contact-socials">
 
-						<!-- Contact Info -->
-							<div class = "contact">
+							<!-- Contact Info -->
+								<div class = "contact">
 
-								<li><i class = "fa-solid fa-envelope style1"></i><a href = "mailto:info@salmonarmjiujitsu.ca" class = "style2">info@salmonarmjiujitsu.ca</a></li>
-								<li><i class = "fa-solid fa-phone style1"></i><a href = "tel:2504633131" class = "style3">(250) 463-3131</a></li>
-								<li><i class = "fa-solid fa-location-dot style1"></i><address>371 7th St SW </br>Salmon Arm, BC </br>V1E 1S9</address></li>
+									<li><i class = "fa-solid fa-envelope"></i><a href = "mailto:info@salmonarmjiujitsu.ca">info@salmonarmjiujitsu.ca</a></li>
+									<li><i class = "fa-solid fa-phone"></i><a href = "tel:2504633131">(250) 463-3131</a></li>
+									<li><i class = "fa-solid fa-location-dot"></i><address>371 7th St SW </br>Salmon Arm, BC </br>V1E 1S9</address></li>
+
+								</div>
+
+							<!-- Socials -->
+								<div class = "socials">
+
+									<h2>Follow Us</h2>
+									<a href = "https://www.instagram.com/salmonarmjiujitsu/"><i class = "fa-brands fa-instagram"></i></a>
+									<a href = "https://www.facebook.com/salmonarmjiujitsu/"><i class = "fa-brands fa-facebook-f"></i></a> 
+									<p>&copy; 2027 Salmon Arm Jiu-Jitsu</p>
+
+								</div>
 
 							</div>
-
-						<!-- Socials -->
-							<div class = "socials">
-
-								<h2>Social Media</h2>
-								<a href = "https://www.instagram.com/salmonarmjiujitsu/"><i class = "fa-brands fa-instagram style2"></i></a>
-								<a href = "https://www.facebook.com/salmonarmjiujitsu/"><i class = "fa-brands fa-facebook-f style2"></i></a> 
-								<a href = "https://m.me/j/AbYsmbIeVWPdQu7S/"><i class = "fa-brands fa-facebook-messenger style2"></i></a> 
-								<a href = "https://chat.whatsapp.com/I2kvI3COkf8BSFkTRGLPdM"><i class = "fa-brands fa-whatsapp style2"></i></a> 
-								<p class = "style2">&copy; 2024 Salmon Arm Jiu-Jitsu</p>
-
-							</div>
-
-						</div>
 
 					</div>
 			</footer>
 
 
+
         <!-- Scripts -->
-            <script src = "assets/js/script.js"></script>  
+            <script src = "assets/js/script.js"></script>
             
     </body>
 </html>
