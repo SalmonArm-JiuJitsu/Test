@@ -39,106 +39,120 @@
 			</header>
 
 
-        <!-- Main -->
-            <main>
+            <!-- Main -->
+			   <main>
 
-				<h1>Free Trial</h1>	
+                <h1>Your First Class</h1>
 
-				<!-- Form -->
+                <div class = "trial">
 
-					<section class = "registration-container" id = "formChoice" style = "padding-top: 80px; padding-bottom: 80px;"">
+					<!-- Safety First -->
+						<section>
+							<h2 class = "trial-label">Safety first</h2>
 
-						<div class = "form-choice-buttons">
+							<div class = "trial-cards">
 
-							<button class="style6" onclick="window.location.href='adult-request.html'">
-								Adult (Myself)
-							</button>
-							
-							<button class="style6" onclick="window.location.href='youth-request.html'">
-								Child (Parent/Guardian)
-							</button>
+								<article class = "trial-safety">
+									<i class = "fa-solid fa-ring trial-icon"></i>
+									<h3>Remove All Jewelry</h3>
+									<p>Rings, earrings, necklaces, bracelets, and watches all come off before class.</p>
+								</article>
 
-						</div>
+								<article class = "trial-safety">
+									<i class = "fa-solid fa-scissors trial-icon"></i>
+									<h3>Trim Nails</h3>
+									<p>Keep fingernails and toenails short and smooth, so no one gets scratched.</p>
+								</article>
 
-					</section>
+								<article class = "trial-safety">
+									<i class = "fa-solid fa-sparkles trial-icon"></i>
+									<h3>Be Clean and Tidy</h3>
+									<p>Arrive clean, in clean clothes, with long hair tied back.</p>
+								</article>
 
-				<!-- What to Wear -->
-					<h2 style = "margin: 100px 0 50px 0;">What To Wear</h2>
-
-						<!-- Attire -->
-						<div class = "attire-grid">
-					
-							<!-- Unsuitable -->
-								<div class = "attire-tile">
-									<div class = "attire-title red">Unsuitable</div>
-						
-									<div class = "attire-content">
-										<img src = "images/trial/unsuitable.jpg">
-						
-										<div class = "attire-labels">
-											<p>Hoodies / Pockets / Zippers</p>
-											<p>Crop Tops / Low Cuts / Short Shorts</p>
-										</div>
-									</div>
-								</div>
-					
-							<!-- Suitable -->
-								<div class = "attire-tile">
-									<div class = "attire-title blue">Suitable</div>
-						
-									<div class = "attire-content">
-										<img src = "images/trial/suitable.jpg">
-						
-										<div class = "attire-labels">
-											<p>T-Shirts & Shorts</p>
-											<p>T-Shirts & Long Shorts</p>
-										</div>
-									</div>
-								</div>
-					
-							<!-- Recommended -->
-								<div class = "attire-tile">
-									<div class = "attire-title green">Recommended</div>
-						
-									<div class = "attire-content">
-										<img src = "images/trial/recommended.jpg">
-						
-										<div class = "attire-labels">
-											<p>Long Sleeves & Spats</p>
-											<p>
-												Full Coverage<br>
-												<span class = "subtext">More Skin Protection</span>
-											</p>
-										</div>
-									</div>
-								</div>
-					
-						</div>
-					
-						<!-- For Everyone's Safety -->
-							<div class = "attire-tile full-width">
-								<div class = "attire-title gray">For Everyone's Safety</div>
-						
-								<div class = "attire-icons">
-						
-									<div>
-										<i class = "fa-solid fa-user"></i>
-										<p>Hair Tied Back</p>
-									</div>
-						
-									<div>
-										<i class = "fa-solid fa-hand"></i>
-										<p>Short, Trimmed Nails</p>
-									</div>
-						
-									<div>
-										<i class = "fa-solid fa-ring"></i>
-										<p>No Jewelry</p>
-									</div>
-						
-								</div>
 							</div>
-					
+						</section>
+
+                    <!-- What You Need -->
+                        <div class = "trial-need">
+                            <h2 class = "trial-label">What you need</h2>
+                            <ul class = "trial-need-list">
+                                <li>Water bottle</li>
+                                <li>Gym clothes</li>
+                                <li>Barefoot or in socks, no special shoes needed</li>
+                            </ul>
+                        </div>
+
+
+                    <!-- What To Wear -->
+                        <section class = "trial-section">
+                            <h2>What To Wear</h2>
+
+                            <div class = "trial-cards">
+
+                                <!-- Unsuitable -->
+                                    <article class = "trial-card">
+                                        <img src = "images/trial/unsuitable.jpg" alt = "Unsuitable outfit">
+                                        <div class = "trial-card-body">
+                                            <span class = "trial-tag trial-tag--avoid">Avoid</span>
+                                            <h3>Unsuitable</h3>
+                                            <ul class = "trial-list trial-list--no">
+                                                <li>Anything with zippers, buttons, or metal</li>
+                                                <li>Hoodies, pockets, or loose, baggy clothing</li>
+                                                <li>Jewelry of any kind</li>
+                                                <li>Revealing clothing</li>
+                                            </ul>
+                                        </div>
+                                    </article>
+
+                                <!-- Suitable -->
+                                    <article class = "trial-card">
+                                        <img src = "images/trial/suitable.jpg" alt = "Suitable outfit">
+                                        <div class = "trial-card-body">
+                                            <span class = "trial-tag trial-tag--good">Works fine</span>
+                                            <h3>Suitable</h3>
+                                            <ul class = "trial-list trial-list--yes">
+                                                <li>Fitted t-shirt</li>
+                                                <li>Shorts/pants with a drawstring waist, no zippers, buttons or pockets</li>
+                                                <li>Comfortable, stretchy athletic wear</li>
+                                                <li>Workout clothes</li>
+                                            </ul>
+                                        </div>
+                                    </article>
+
+                                <!-- Recommended -->
+                                    <article class = "trial-card trial-card--best">
+                                        <img src = "images/trial/recommended.jpg" alt = "Recommended outfit">
+                                        <div class = "trial-card-body">
+                                            <span class = "trial-tag trial-tag--best">Best choice</span>
+                                            <h3>Recommended</h3>
+                                            <ul class = "trial-list trial-list--yes">
+                                                <li>Long-sleeve rashguard, fitted, no zippers or loose fabric</li>
+                                                <li>Leggings, or spats</li>
+                                                <li>Grappling-specific shorts over leggings or spats</li>
+                                            </ul>
+                                        </div>
+                                    </article>
+
+                            </div>
+
+							<div class = "trial-note">
+                                <i class = "fa-solid fa-thumbs-up"></i>
+                                <p>Don't have a rashguard or spats? <strong>Fitted gym clothes are fine</strong>, no need 
+									to buy anything new.</p>
+                            </div>
+
+                        </section>
+
+
+                    <!-- Questions -->
+                        <section class = "trial-questions">
+                            <h2>Still Have Questions?</h2>
+                            <p>Email us and we will help you sort out what to bring and wear.</p>
+                            <a class = "trial-email" href = "mailto:info@salmonarmjiujitsu.ca">info@salmonarmjiujitsu.ca</a>
+                        </section>
+
+                </div>
             </main>
 
 
