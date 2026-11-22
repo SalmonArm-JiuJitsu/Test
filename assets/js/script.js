@@ -38,28 +38,12 @@ document.querySelector(".contact-button").addEventListener("click", () => {
 
 
 
-// Home Icon Disappear On Scoll
-
-window.addEventListener('scroll', function() {	
-
-	const icon = document.querySelector(".icon");
-
-	if (window.scrollY > 60) {
-		icon.classList.add("disappear");
-	}
-	else {
-		icon.classList.remove("disappear");
-	}
-   });
-
-
-
 // Trial Choice (Adult & Youth)
 		
-function showTrialForm(type) {
+function showForm(type) {
 
 	// hide chooser
-	const choice = document.getElementById("trialChoice");
+	const choice = document.getElementById("formChoice");
 	if (choice) choice.style.display = "none";
 
 	// hide both forms first
@@ -111,32 +95,54 @@ function contactForm() {
 
 
 
-// Validate Trials, Enrollment & Waitlist Forms
+// Validate Trials & Waitlist Forms
 
 function validateRegistrationForm() {
-	const parentPhone = document.getElementById('parentPhone');
 
-	if (parentPhone.value.length !== 10) {
-		alert("Please enter a 10-digit phone number.")
+	const phone = document.getElementById("parentPhone");
+
+	if (!document.getElementById("registrationForm").checkValidity()) {
+		document.getElementById("registrationForm").reportValidity();
 		return false;
 	}
 
-	if (!/^\d+$/.test(parentPhone.value)) {
-		alert("Please include only numbers.")
+	if (phone.value.length !== 10) {
+		alert("Please enter a 10-digit phone number.");
+		phone.focus();
 		return false;
 	}
 
-	const fakeNumbers = ['1234567890, 0123456789, 1231231231', '1231231232', '1231231233, 1231231234, 1231231235, 1231231236, 1231231237, 1231231238, 1231231239, 1231231230'];
+	if (!/^\d+$/.test(phone.value)) {
+		alert("Please include only numbers.");
+		phone.focus();
+		return false;
+	}
 
-	if (fakeNumbers.includes(parentPhone.value)) {
+	const fakeNumbers = [
+		'1234567890',
+		'0123456789',
+		'1231231231',
+		'1231231232',
+		'1231231233',
+		'1231231234',
+		'1231231235',
+		'1231231236',
+		'1231231237',
+		'1231231238',
+		'1231231239',
+		'1231231230'
+	];
+
+	if (fakeNumbers.includes(phone.value)) {
 		alert("Please enter a real phone number.");
+		phone.focus();
 		return false;
 	}
 
-	// put into waitlist.js
 	const interests = document.querySelectorAll('input[name="classInterest[]"]');
 
 	if (interests.length > 0) {
+
 		const checked = document.querySelectorAll('input[name="classInterest[]"]:checked');
 
 		if (checked.length === 0) {
@@ -144,9 +150,6 @@ function validateRegistrationForm() {
 			return false;
 		}
 	}
-	//waitlist.js
 
-	else {
-		return true;
-	}
+	return true;
 }
