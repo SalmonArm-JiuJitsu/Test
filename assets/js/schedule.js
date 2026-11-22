@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const BOOKING_ENDPOINT = 'https://formsubmit.co/5706783fd4c76300c52561682502228e';
 
 // Where people land after the FormSubmit captcha (needs a full https:// URL)
-const THANK_YOU_URL = 'https://salmonarmjiujitsu.ca/thank-you.html';
+const TRIAL_URL = 'https://salmonarmjiujitsu.ca/trial.html';
 
 // Google Sheet (Apps Script web app)
 const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzGxX4lWJe1r8sgzVuwML_K7wnbdtApFHobdWF8wcYGe6FNS3jwsKgOhdqJuGLk8VVGLQ/exec';
@@ -313,7 +313,7 @@ const CLASS_HIDDEN = `
 	<input type="hidden" name="class_date" class="js-date">
 	<input type="hidden" name="class_time" class="js-time">
 	<input type="hidden" name="_subject" value="New free trial booking">
-	<input type="hidden" name="_next" value="${THANK_YOU_URL}">`;
+	<input type="hidden" name="_next" value="${TRIAL_URL}">`;
 
 function buildBookingModal() {
 	const overlay = createEl('div', 'booking-overlay');
