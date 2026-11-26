@@ -1,0 +1,25 @@
+/* ==========================================================
+   PRIVACY POLICY (privacy-policy.html)
+   ========================================================== */
+
+.privacy {
+	display: block;
+	margin: 0 auto;
+	height: 100%;
+	padding-bottom: 10px;
+	max-width: 1400px;
+}
+
+	.privacy h2 {
+		padding: 0;
+		margin: 100px 0 40px 0;
+	}
+
+	.privacy h4 {
+		margin: 50px 0 25px 0;
+	}
+
+	.privacy li {
+		list-style: disc;
+		margin: 25px 18px;
+	}

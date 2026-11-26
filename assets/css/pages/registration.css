@@ -1,0 +1,455 @@
+/* ==========================================================
+   REGISTRATION PAGES
+   youth-registration.html, adult-registration.html,
+   registration-complete.html
+
+   CONTENTS
+   1. Page title + form box
+   2. Form fields
+   3. Program picker
+   4. Help box ("Not sure what to choose?")
+   5. Registration details cards (season, payment, refunds)
+   6. Agreement + submit
+   7. Registration complete
+   ========================================================== */
+
+
+/* ==========================================================
+   1. Page title + form box
+   ========================================================== */
+
+.registration-title {
+	padding: 60px 0;
+}
+
+	/* adult page: sits right above the subtitle */
+	.registration-title--with-subtitle {
+		padding-bottom: 15px;
+	}
+
+.registration-subtitle {
+	font-family: "Source Sans Pro";
+	margin-bottom: 50px;
+	color: #303030;
+	font-size: 18pt;
+	text-align: center;
+}
+
+.registration-container {
+	max-width: 700px;
+	margin: auto;
+	padding: 40px;
+	background: var(--border);
+	border-radius: 10px;
+}
+
+	@media screen and (max-width: 500px) {
+		.registration-container {
+			padding: 40px 30px;
+		}
+	}
+
+
+/* ==========================================================
+   2. Form fields
+   ========================================================== */
+
+.registration-form h2 {
+	font-size: 24pt;
+	font-family: "nimbus-sans-bold";
+	letter-spacing: 1px;
+	color: var(--ink);
+	margin-bottom: 25px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.registration-form .field-left,
+.registration-form .field-right {
+	width: 48%;
+}
+
+	@media screen and (max-width: 720px) {
+		.registration-form .field-left,
+		.registration-form .field-right {
+			width: 100%;
+			float: none;
+		}
+	}
+
+.registration-form input {
+	background: #fff;
+	border: solid 2px #d9d9ee;
+	border-radius: 7px;
+}
+
+.registration-form label {
+	color: var(--ink);
+	letter-spacing: 1.5px;
+	font-size: 16pt;
+	text-transform: none;
+	margin: -15px 0 10px 0;
+}
+
+
+/* ==========================================================
+   3. Program picker
+   ========================================================== */
+
+.registration-programs {
+	margin-top: 40px;
+	padding: 15px 0;
+	border-radius: 14px;
+	background: rgba(0, 0, 50, 0.065);
+}
+
+	.registration-programs-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 15px;
+	}
+
+		/* adult page: 2 columns, Open Mat spans the full row */
+		.registration-programs-grid--adult {
+			grid-template-columns: repeat(2, 1fr);
+			padding: 0 20px;
+		}
+
+			.registration-programs-grid--adult .program-option:nth-child(3) {
+				grid-column: 1 / -1;
+			}
+
+		@media screen and (max-width: 720px) {
+			.registration-programs-grid,
+			.registration-programs-grid--adult {
+				grid-template-columns: 1fr;
+			}
+		}
+
+.program-option {
+	background: var(--sky);
+	border-radius: 8px;
+	padding: 18px;
+	cursor: pointer;
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	width: 100%;
+}
+
+	/* youth options sit flush; the adult ones keep the label offset from .registration-form label */
+	.registration-programs-grid .program-option {
+		margin: 0;
+	}
+
+	.registration-programs-grid--adult .program-option {
+		margin: -15px 0 10px 0;
+	}
+
+	.program-option input[type = "radio"] {
+		width: auto;
+		height: auto;
+		margin: 4px 0 0 0;
+		transform: scale(1.2);
+	}
+
+	.program-option-name {
+		font-size: 18pt;
+		font-family: "nimbus-sans-bold";
+		color: var(--ink);
+		margin-bottom: 6px;
+	}
+
+	.program-option-time {
+		font-size: 14pt;
+		color: var(--ink);
+		margin-bottom: 3px;
+	}
+
+	.program-option-days {
+		font-size: 11pt;
+		color: var(--text-soft);
+	}
+
+
+/* ==========================================================
+   4. Help box
+   JS hooks: .help-box, .help-toggle, .open (youth-registration.js)
+   ========================================================== */
+
+.help-box {
+	margin: 20px 0 40px 0;
+}
+
+	.help-box button {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: var(--sky);
+		color: var(--ink);
+		padding: 15px 18px;
+		border-radius: 8px;
+		cursor: pointer;
+		font-size: 14pt;
+		font-family: "nimbus-sans-bold";
+	}
+
+		.help-box button:hover,
+		.help-box button:active {
+			background: var(--sky);
+			box-shadow: none;
+			color: var(--ink);
+		}
+
+		.help-box button span {
+			flex: 1;
+			text-align: left;
+			margin-left: 12px;
+			padding-top: 6px;
+			font-size: 12pt;
+		}
+
+			@media screen and (max-width: 700px) {
+				.help-box button span {
+					font-size: 11pt;
+				}
+			}
+
+	.help-content {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.25s ease, padding 0.25s ease;
+		background: #485878;
+		border-radius: 0 0 8px 8px;
+		padding: 0 18px;
+	}
+
+		.help-content p {
+			margin: 15px 0;
+			font-family: "Source Sans Pro";
+			font-weight: 600;
+			color: #fff;
+			font-size: 13pt;
+		}
+
+	.help-box.open .help-content {
+		max-height: 200px;
+		padding: 10px 18px 15px 18px;
+	}
+
+	.help-box.open .arrow {
+		transform: rotate(180deg);
+		transition: transform 0.2s ease;
+	}
+
+
+/* ==========================================================
+   5. Registration details cards
+   ========================================================== */
+
+.season-info {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	margin: auto;
+}
+
+.season-card {
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18), 0 8px 20px -4px rgba(15, 23, 42, 0.22);
+}
+
+	.season-card-header {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 16px 22px;
+		font-family: "nimbus-sans-bold";
+		font-size: 18pt;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: #fff;
+	}
+
+		.season-card-header i {
+			width: auto;
+			height: auto;
+			font-size: 18pt;
+			margin-right: 18px;
+			color: #fff;
+		}
+
+		.season-card-header--blue {
+			background: #2563eb;
+		}
+
+		.season-card-header--green {
+			background: #0d9488;
+		}
+
+		.season-card-header--orange {
+			background: #d97706;
+		}
+
+	.season-card-content {
+		padding: 30px;
+		font-family: "nimbus-sans-regular";
+	}
+
+		/* refunds list */
+		.season-card-content ul {
+			padding: 25px 15px;
+		}
+
+		.season-card-content li {
+			margin: 0 0 14px 0;
+			display: flex;
+			align-items: flex-start;
+			gap: 12px;
+			font-family: "nimbus-sans-bold";
+			font-weight: 600;
+			line-height: 1.5;
+		}
+
+			.season-card-content li::before {
+				content: "\f00d";
+				font-family: "Font Awesome 6 Pro";
+				font-weight: 900;
+				color: #d07706;
+				margin-top: 2px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 18px;
+				min-width: 18px;
+				line-height: 1;
+			}
+
+	/* season + payment cards: centered text */
+	.season-details {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		text-align: center;
+		font-size: 14pt;
+	}
+
+		.season-details h3,
+		.season-details p {
+			margin: 0;
+		}
+
+	.season-price {
+		color: #03b647;
+	}
+
+
+/* ==========================================================
+   6. Agreement + submit
+   ========================================================== */
+
+.registration-form .registration-agreement {
+	display: grid;
+	grid-template-columns: 22px auto;
+	justify-content: center;
+	column-gap: 12px;
+	align-items: start;
+	cursor: pointer;
+	background: #d9ffed;
+	border: 2px solid #09f1a8;
+	padding: 20px;
+	border-radius: 8px;
+	margin: 25px 0 40px 0;
+}
+
+/* Continue to Payment */
+.registration-submit button {
+	width: 100%;
+	border-radius: 8px;
+	font-size: 16pt;
+}
+
+	.registration-submit button:hover,
+	.registration-submit button:active {
+		background: #fff;
+		box-shadow: none;
+		outline: solid 1px var(--blue);
+		color: var(--blue);
+	}
+
+
+/* ==========================================================
+   7. Registration complete (registration-complete.html)
+   ========================================================== */
+
+.registration-complete-page {
+	min-height: 100vh;
+	padding-top: 80px;
+}
+
+.registration-complete {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 65px 60px 70px 60px;
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 20px;
+	box-shadow: 0 16px 38px rgba(22, 32, 51, 0.09);
+	text-align: center;
+}
+
+	@media screen and (max-width: 600px) {
+		.registration-complete {
+			padding: 48px 24px 52px;
+		}
+	}
+
+	.registration-complete-icon {
+		padding: 0;
+		margin-bottom: 25px;
+		color: #42c76e;
+		font-size: 70px;
+	}
+
+	.registration-complete h2 {
+		color: var(--ink);
+		font-family: "nimbus-sans-bold";
+		font-size: 34pt;
+		letter-spacing: 1px;
+		margin-bottom: 25px;
+	}
+
+		@media screen and (max-width: 600px) {
+			.registration-complete h2 {
+				font-size: 28pt;
+			}
+		}
+
+	.registration-complete-text {
+		padding: 0 0 40px 0;
+		color: var(--text-soft);
+		font-family: "nimbus-sans-bold";
+		font-size: 16pt;
+	}
+
+	.registration-complete h4 {
+		color: var(--ink);
+		font-size: 18pt;
+		margin-bottom: 25px;
+	}
+
+	/* Youth / Adult registration buttons (default blue button) */
+	.registration-complete-actions {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+		flex-wrap: wrap;
+	}
+
+		.registration-complete-actions button {
+			min-width: 200px;
+		}

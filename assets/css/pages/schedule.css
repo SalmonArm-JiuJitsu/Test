@@ -1,0 +1,629 @@
+/* ==========================================================
+   SCHEDULE PAGE (schedule.html + assets/js/schedule.js)
+
+   CONTENTS
+   1. Page + "New here?" note
+   2. Filter dropdown
+   3. Week controls
+   4. Week grid + class blocks
+   5. Holiday closures
+   6. Booking popup (built by schedule.js)
+   ========================================================== */
+
+
+/* ==========================================================
+   1. Page + "New here?" note
+   ========================================================== */
+
+.schedule {
+	margin: 0 auto;
+	max-width: 1400px;
+}
+
+.schedule-note {
+	background: var(--blue);
+	color: #fff;
+	text-align: center;
+	margin: 0 0 16px;
+	padding: 16px 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 14px rgba(30, 79, 216, 0.35);
+}
+
+	.schedule-note-title {
+		font-family: "Barlow Semi Condensed", sans-serif;
+		font-weight: 700;
+		font-size: 26px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		line-height: 1.15;
+	}
+
+	.schedule-note-text {
+		font-weight: 600;
+		font-size: 17px;
+		line-height: 1.3;
+	}
+
+		.schedule-note-text strong {
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+/* the week is drawn by schedule.js inside this */
+.schedule-app {
+	font-family: Arial, sans-serif;
+}
+
+	/* week arrows (buttons created by schedule.js) */
+	.schedule-app button,
+	.schedule-filter-dropdown button {
+		padding: 9px 12px;
+		background-color: #fff;
+		border: solid 2px #d3d3d3;
+		border-radius: 6px;
+		cursor: pointer;
+		font-weight: 600;
+	}
+
+		.schedule-app button:hover,
+		.schedule-app button:active,
+		.schedule-filter-dropdown button:hover,
+		.schedule-filter-dropdown button:active {
+			background-color: var(--blue);
+			border-color: var(--blue);
+			box-shadow: none;
+			outline: none;
+		}
+
+	.schedule-app i,
+	.schedule-filter-dropdown i {
+		background: none;
+		padding: 13px 11px 11px 13px;
+		width: 16pt;
+		height: 16pt;
+		display: flex;
+		justify-content: center;
+		transition: none;
+	}
+
+		.schedule-app button:hover i,
+		.schedule-filter-dropdown button:hover i {
+			color: #eee;
+		}
+
+
+/* ==========================================================
+   2. Filter dropdown
+   ========================================================== */
+
+.schedule-filter-dropdown {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 15px;
+}
+
+	/* filter icon button */
+	.schedule-filter-dropdown button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+.schedule-filter-menu {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	margin-top: 6px;
+	min-width: 180px;
+	padding: 10px 0;
+	background: #eee;
+	border-radius: 8px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+	z-index: 10;
+}
+
+	.schedule-filter-menu.hidden {
+		display: none;
+	}
+
+	.schedule-filter-menu [data-filter] {
+		padding: 10px 15px;
+		cursor: pointer;
+		font-size: 10pt;
+	}
+
+		.schedule-filter-menu [data-filter]:hover {
+			background: var(--sky);
+		}
+
+
+/* ==========================================================
+   3. Week controls
+   ========================================================== */
+
+.controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+.week-label {
+	flex-grow: 1;
+	text-align: center;
+	font-weight: bold;
+	font-size: 13.2pt;
+}
+
+
+/* ==========================================================
+   4. Week grid + class blocks
+   ========================================================== */
+
+.week-row {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 10px;
+	text-align: center;
+}
+
+	@media screen and (max-width: 900px) {
+		.week-row {
+			grid-template-columns: 1fr;
+			gap: 30px;
+		}
+	}
+
+.day-column {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 10px;
+	min-height: 150px;
+	background: var(--border);
+	border-radius: 8px;
+	box-sizing: border-box;
+}
+
+	@media screen and (max-width: 900px) {
+		.day-column {
+			gap: 20px;
+		}
+	}
+
+	.day-column h3 {
+		margin: 0;
+		font-size: 1rem;
+		color: var(--ink);
+	}
+
+	/* the date only shows on mobile, next to the day name */
+	.day-date {
+		display: none;
+	}
+
+	@media screen and (max-width: 900px) {
+		.day-header {
+			display: flex;
+			justify-content: center;
+			align-items: baseline;
+			gap: 8px;
+		}
+
+		.day-date {
+			display: inline;
+			font-size: 0.9rem;
+			font-weight: normal;
+			opacity: 0.8;
+		}
+	}
+
+/* background and text color are set inline from PROGRAMS in schedule.js */
+.class-block {
+	padding: 10px;
+	border-radius: 6px;
+	font-size: 10.8pt;
+}
+
+	.class-time {
+		font-weight: bold;
+		margin-bottom: 2px;
+	}
+
+	.no-booking-yet {
+		margin-top: 4px;
+		font-size: 9.6pt;
+		color: #e53935;
+		font-weight: bold;
+	}
+
+	/* "Book Free Trial" link inside a class block */
+	.schedule-button {
+		display: inline-block;
+		margin-top: 4px;
+		padding: 4px 8px;
+		font-size: 9.6pt;
+		font-weight: bold;
+		color: #000;
+		border-radius: 4px;
+		text-decoration: none;
+		background-color: rgba(255, 255, 255, 0.7);
+	}
+
+		.schedule-button:hover {
+			background-color: #fff;
+			color: #202020;
+		}
+
+
+/* ==========================================================
+   5. Holiday closures
+   ========================================================== */
+
+.holiday-title {
+	padding: 0;
+	margin: 100px 0 40px 0;
+}
+
+.holiday-list {
+	max-width: 800px;
+	margin: 40px auto 0;
+	background: var(--border);
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+	.holiday-row {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		padding: 22px 30px;
+		border-bottom: 1px solid rgba(0, 0, 255, 0.08);
+	}
+
+		.holiday-row:last-child {
+			border-bottom: none;
+		}
+
+		.holiday-row span {
+			font-size: 16pt;
+			letter-spacing: 1px;
+		}
+
+	.holiday-list i {
+		background: none;
+		color: var(--cyan);
+		font-size: 22pt;
+		width: 30px;
+		height: 30px;
+		padding: 0;
+		margin-right: 10px;
+	}
+
+
+/* ==========================================================
+   6. Booking popup (built by schedule.js)
+   ========================================================== */
+
+.booking-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 2000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	background: rgba(7, 17, 48, 0.6);
+}
+
+	.booking-overlay[hidden],
+	.booking-modal [hidden] {
+		display: none !important;
+	}
+
+.booking-modal {
+	position: relative;
+	width: 100%;
+	max-width: 560px;
+	max-height: 92vh;
+	overflow-y: auto;
+	padding: 24px;
+	background: #fff;
+	border-radius: 14px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+	font-size: 12pt;
+	letter-spacing: 0.5px;
+}
+
+	@media screen and (max-width: 480px) {
+		.booking-modal {
+			padding: 18px 14px;
+		}
+	}
+
+	/* title */
+	.booking-title {
+		margin: 4px 60px 16px 0;
+		font-family: "nimbus-sans-bold";
+		font-size: 20pt;
+		font-weight: normal;
+		letter-spacing: 3px;
+		text-transform: uppercase;
+		text-align: left;
+	}
+
+		@media screen and (max-width: 480px) {
+			.booking-title {
+				font-size: 17pt;
+				letter-spacing: 2px;
+			}
+		}
+
+	/* close (X) button */
+	.booking-modal > button {
+		position: absolute;
+		top: 18px;
+		right: 18px;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+		background: #fff;
+		color: var(--ink);
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		font-size: 18pt;
+		line-height: 1;
+		outline: none;
+	}
+
+		.booking-modal > button:hover,
+		.booking-modal > button:active {
+			background: #fff;
+			box-shadow: none;
+			border-color: var(--blue);
+			color: var(--blue);
+			outline: none;
+		}
+
+/* class summary */
+.booking-summary {
+	margin-bottom: 24px;
+	padding: 18px 20px;
+	background: #d9ffed;
+	border: 2px solid #09f1a8;
+	border-radius: 10px;
+}
+
+	.booking-program-row {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 14px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid rgba(9, 241, 168, 0.5);
+	}
+
+		.booking-program-name {
+			margin: 0;
+			font-size: 14pt;
+		}
+
+		.booking-program-ages {
+			font-size: 11pt;
+			color: var(--text-soft);
+		}
+
+	.booking-meta {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: 8px;
+		font-size: 12pt;
+	}
+
+		.booking-meta i {
+			padding: 0;
+			font-size: 13pt;
+			color: var(--blue);
+			transition: none;
+		}
+
+/* who toggle (Myself / My child) */
+.booking-who h4 {
+	margin: 0 0 14px;
+	font-size: 12pt;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+}
+
+.booking-toggle {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+	.booking-toggle button {
+		padding: 0 12px;
+		height: 54px;
+		background: #fff;
+		color: var(--ink);
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		font-size: 12pt;
+		outline: none;
+	}
+
+		.booking-toggle button:hover,
+		.booking-toggle button:active {
+			background: #fff;
+			box-shadow: none;
+			border-color: var(--blue);
+			color: var(--blue);
+			outline: none;
+		}
+
+		/* must stay after :hover so the selected button keeps its blue fill */
+		.booking-toggle button.active {
+			background: var(--blue);
+			border-color: var(--blue);
+			color: #fff;
+		}
+
+/* forms */
+.booking-form fieldset {
+	border: none;
+	min-width: 0;
+}
+
+.booking-form .bk-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14px;
+}
+
+	@media screen and (max-width: 480px) {
+		.booking-form .bk-row {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+	}
+
+.booking-form .bk-field {
+	margin-bottom: 18px;
+}
+
+.booking-form label {
+	display: block;
+	float: none;
+	margin-bottom: 8px;
+	font-family: "nimbus-sans-bold";
+	font-size: 11.5pt;
+	font-weight: normal;
+	letter-spacing: 0.5px;
+	text-transform: none;
+}
+
+.booking-form input,
+.booking-form select {
+	width: 100%;
+	height: 54px;
+	padding: 0 16px;
+	font-size: 12pt;
+	font-family: "nimbus-sans-regular";
+	color: var(--ink);
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+	.booking-form input:focus,
+	.booking-form select:focus {
+		border-color: var(--blue);
+	}
+
+	.booking-form input:user-invalid,
+	.booking-form select:user-invalid {
+		border-color: #d97706;
+	}
+
+.booking-form input[type="hidden"] {
+	display: none;
+}
+
+/* Book Class (submit) button */
+.booking-form button {
+	width: 100%;
+	height: 54px;
+	margin-top: 2px;
+	padding: 0;
+	background: var(--blue);
+	color: #fff;
+	border-radius: 6px;
+	font-size: 13pt;
+}
+
+	.booking-form button:hover,
+	.booking-form button:active {
+		background: #fff;
+		box-shadow: none;
+		outline: solid 1px var(--blue);
+		color: var(--blue);
+	}
+
+/* numbered cards */
+.booking-card {
+	margin-bottom: 18px;
+	padding: 20px 16px 2px;
+	background: #f7f9fc;
+	border: 1px solid var(--border);
+	border-radius: 12px;
+}
+
+	.booking-card-head {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin-bottom: 20px;
+		padding: 0 0 16px 4px;
+		border-bottom: 1px solid var(--border);
+	}
+
+		.booking-card-head h4 {
+			margin: 0;
+			font-size: 13.5pt;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+		}
+
+	.booking-sub {
+		margin-top: 2px;
+		font-size: 10.5pt;
+		color: var(--text-soft);
+	}
+
+	.booking-step {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		background: var(--blue);
+		color: #fff;
+		font-family: "nimbus-sans-bold";
+		font-size: 12pt;
+		padding: 3px 0 0 2px;
+	}
+
+		/* second card gets the dark number */
+		.booking-card + .booking-card .booking-step {
+			background: var(--ink);
+		}
+
+/* yellow alert */
+.booking-alert {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	margin-bottom: 18px;
+	padding: 14px 16px;
+	background: #fff8e1;
+	border: 1px solid #f5c542;
+	border-left: 5px solid #f5a800;
+	border-radius: 8px;
+	color: #5c4400;
+	font-size: 11pt;
+	line-height: 1.4;
+}
+
+	.booking-alert i {
+		padding: 2px 0 0;
+		font-size: 14pt;
+		color: #d98f00;
+		transition: none;
+	}
