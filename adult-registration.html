@@ -15,7 +15,9 @@
 		<title>Salmon Arm Jiu-Jitsu | Adult Enrollment</title>
 		<meta charset = "utf-8" />
         <meta name = "viewport" content = "width = device-width, initial-scale = 1, user-scalable = yes" />
+		<link rel = "stylesheet" href = "assets/fonts/fontawesome-pro/css/all.min.css" />
 		<link rel = "stylesheet" href = "assets/css/style.css" />
+		<link rel = "stylesheet" href = "assets/css/pages/registration.css" />
 	</head>
 
 	<body style = "visibility: hidden;">
@@ -42,12 +44,12 @@
 			<!-- Main -->
 				<main>
 
-					<h2 style = "padding: 60px 0  15px 0">Registration Form</h2>
-					<p class = "subtitle">(For Ages 19+)</p>
+					<h2 class = "registration-title registration-title--with-subtitle">Registration Form</h2>
+					<p class = "registration-subtitle">(For Ages 19+)</p>
 				
-					<section class = "registration-container season-registration">
+					<section class = "registration-container">
 				
-						<form class = "form" id = "registrationForm">
+						<form class = "form registration-form" id = "registrationForm">
 				
 							<!-- Participant Info -->
 								<h2>Participant Info</h2>
@@ -74,32 +76,32 @@
 								</div>
 
 							<!-- Schedule -->
-								<div class = "programs-container">
+								<div class = "registration-programs">
 									<h2>Schedule</h2>
 
-									<div class = "adult-programs">
+									<div class = "registration-programs-grid registration-programs-grid--adult">
 										
-										<label class = "program-schedules">
+										<label class = "program-option">
 											<div>
-												<div class = "heading">No-Gi</div>
-												<div class = "subheading">6:00 - 7:15 pm</div>
-												<div class = "details">Mon - Fri</div>
+												<div class = "program-option-name">No-Gi</div>
+												<div class = "program-option-time">6:00 - 7:15 pm</div>
+												<div class = "program-option-days">Mon - Fri</div>
 											</div>
 										</label>
 										
-										<label class = "program-schedules">
+										<label class = "program-option">
 											<div>
-												<div class = "heading">MMA</div>
-												<div class = "subheading">7:15 - 8:15 pm</div>
-												<div class = "details">Mon - Fri</div>
+												<div class = "program-option-name">MMA</div>
+												<div class = "program-option-time">7:15 - 8:15 pm</div>
+												<div class = "program-option-days">Mon - Fri</div>
 											</div>
 										</label>
 
-										<label class = "program-schedules">
+										<label class = "program-option">
 											<div>
-												<div class = "heading">Open Mat</div>
-												<div class = "subheading">10:30 - 11:30 am</div>
-												<div class = "details">Sat & Sun</div>
+												<div class = "program-option-name">Open Mat</div>
+												<div class = "program-option-time">10:30 - 11:30 am</div>
+												<div class = "program-option-days">Sat & Sun</div>
 											</div>
 										</label>
 
@@ -114,7 +116,7 @@
 									<!-- Season -->
 									<div class = "season-card">
 						
-										<div class = "season-card-header blue">
+										<div class = "season-card-header season-card-header--blue">
 											<h4><i class = "fa-solid fa-calendar"></i>
 											Season</h4>
 										</div>
@@ -129,14 +131,14 @@
 								<!-- Payment -->
 									<div class = "season-card">
 					
-										<div class = "season-card-header green">
+										<div class = "season-card-header season-card-header--green">
 											<h4><i class = "fa-solid fa-credit-card"></i>
 											Payment</h4>
 										</div>
 					
 										<div class = "season-card-content season-details">
 											<p>Regular: <s>$669 + GST</s></p>
-											<h3 style = "color: #03b647">$535.50 + GST</h3>
+											<h3 class = "season-price">$535.50 + GST</h3>
 										</div>
 					
 									</div>
@@ -144,18 +146,18 @@
 									<!-- Refunds -->
 										<div class = "season-card">
 						
-											<div class = "season-card-header orange">
+											<div class = "season-card-header season-card-header--orange">
 												<h4><i class = "fa-solid fa-arrow-rotate-left"></i>
 												Refunds</h4>
 											</div>
 						
 											<div class = "season-card-content">
 						
-												<p style = "margin-top:0;">
+												<p>
 													All registrations are final. We do not offer refunds for:
 												</p>
 						
-												<ul class = "negative">
+												<ul>
 													<li>Missed classes</li>
 													<li>Changes in your availability</li>
 													<li>Withdrawal</li>
@@ -172,7 +174,7 @@
 							<!-- Agreement Checkbox -->
 								<div class = "field">
 					
-									<label class = "registration-agreement" style = "margin: 25px 0 40px 0;">
+									<label class = "registration-agreement">
 										<input type = "checkbox" id = "agreement" required>
 										<span>
 											I have read and agree to the registration details above.
@@ -182,9 +184,9 @@
 								</div>
 				
 							<!-- Submit -->
-								<button type = "button" id = "payButton" class = "submit-button">
-									Continue to Payment
-								</button>
+								<div class = "registration-submit">
+									<button type = "button" id = "payButton">Continue to Payment</button>
+								</div>
 				
 						</form>
 				
@@ -195,13 +197,13 @@
 
 
          <!-- Footer -->    
-			<footer id = "footer">
+			<footer id = "footer" class = "footer">
 
 				<!-- Form & Location -->
 					<div class = "form-location">
 
 						<!-- Form -->
-							<form class = "form" method = "post" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
+							<form class = "form footer-form" method = "post" action = "https://formsubmit.co/5706783fd4c76300c52561682502228e">
 
 								<!-- Fields -->
 									<div class = "field-left">
@@ -273,7 +275,7 @@
 			</footer>
 
 		<!-- Wheel of Death -->
-		<div id = "loadingOverlay">
+		<div id = "loadingOverlay" class = "loading-overlay">
 			<div class = "loader"></div>
 		</div>
 
